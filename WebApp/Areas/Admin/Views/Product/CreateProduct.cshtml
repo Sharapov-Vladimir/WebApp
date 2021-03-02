@@ -1,0 +1,56 @@
+﻿@model CreateProductViewModel
+@{
+    ViewData["Title"] = "Добавить продукт";
+
+}
+<body>
+
+
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <form asp-action="CreateProduct" method="post" class="form" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="SelectedCategory">Категория</label>
+            <select class="form-control" asp-for="SelectedCategory">
+
+                @foreach (var category in Model.Categories)
+                {
+                    <option>@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name">Название продукта</label>
+            <input class="form-control" type="text" asp-for="Name" />
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Описание товара</label>
+            <textarea class="form-control" asp-for="Description"></textarea>
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price">Цена</label>
+            <input class="form-control" type="text" asp-for="Price" />
+            <span class="text-danger" asp-validation-for="Price"></span>
+        </div>
+        <div class="form-group">
+            <label>Изображение</label>
+            <input class="form-control-file" type="file" name="file" />
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Добавить" />
+
+      
+
+    </form>
+
+
+
+</body>
+@section scripts
+{
+
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+
+}

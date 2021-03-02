@@ -1,0 +1,39 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Список заказов";
+}
+<body>
+    <table class="table taЬle-striped table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Дата</th>
+                <th class="text-center">Заказчик</th>
+                <th class="text-center">Заказ</th>
+                <th class="text-center">Сумма заказа</th>
+                <th class="text-center">Статус</th>
+                <th class="text-center">Действия</th>
+            </tr>
+        </thead>
+        @foreach (var order in Model)
+        {
+            <tr>
+
+                @await Html.PartialAsync("TablePartial", order)
+               
+                <td class="text-center">@(order.IsDelivered?"Доставлен":"Отменен")</td>
+                <td class="text-center">
+                    <form method="post" asp-controller="Order" asp-action="Delete" class="form" style="margin:5px">
+                        <input type="hidden" name="returnToAction" value="Archive" />
+                        <input type="hidden" name="OrderId" value="@order.Id" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Удалить
+                        </button>
+
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>

@@ -1,0 +1,33 @@
+﻿@model Courier
+@{
+    ViewData["Title"] = "Регистрация курьера";
+
+}
+<body>
+    
+    <form asp-action="Create" method="post" class="form" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label asp-for="FirstName">Имя</label>
+            <input class="form-control" type="text" asp-for="FirstName" />
+            <span class="text-danger" asp-validation-for="FirstName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName">Фамилия</label>
+            <input class="form-control" type="text" asp-for="LastName" />
+            <span class="text-danger" asp-validation-for="LastName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber">Номер телефона</label>
+            <input class="form-control" type="text" asp-for="PhoneNumber" />
+            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+        </div>
+       
+        
+
+        <input type="submit" class="btn btn-primary" value="Добавить" />
+
+
+    </form>
+
+</body>

@@ -1,0 +1,56 @@
+﻿@model OrderViewModel
+@{
+    ViewData["Title"] = "Горящие заказы";
+}
+<body>
+    
+        <table class="table taЬle-striped table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Дата</th>
+                    <th class="text-center">Заказчик</th>
+                    <th class="text-center">Заказ</th>
+                    <th class="text-center">Сумма заказа</th>
+                    <th class="text-center">Действия</th>
+                </tr>
+            </thead>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+
+                    @await Html.PartialAsync("TablePartial", order)
+
+                    <td class="text-center">
+
+                        <form method="post" asp-action="Delete" class="form" style="margin:5px">
+
+                            <input type="hidden" name="returnToAction" value="Hot" />
+                            <input type="hidden" name="OrderId" value="@order.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Удалить
+                            </button>
+
+                        </form>
+                        <form method="post" asp-action="ToArchive" class="form" style="margin:5px">
+
+                            <input type="hidden" name="returnToAction" value="Hot" />
+                            <input type="hidden" name="OrderId" value="@order.Id" />
+                            <button type="submit" class="btn btn-sm btn-info">
+                                В архив
+                            </button>
+
+                        </form>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div page-model="@Model.PagingInfo" page-action="Hot" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-secondary"
+             page-class-selected="btn-primary"
+             class="btn-group pull-right m-1">
+        </div>
+    
+</body>

@@ -1,0 +1,42 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Домашняя страница";
+}
+<body>
+    <div class="side-nav">
+
+        
+            @foreach (var item in Model.categories)
+            {
+                <div class="category-section p-2">
+                    <a asp-action="List" asp-route-category="@item.Name">
+                        <img src=@item.ImgPath alt="@item.Name" class="rounded" width="40" height="40" />
+                        <span>@item.Name</span>
+                    </a>
+                </div>
+            }
+      
+    </div>  
+    <div class="main-prod">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="4000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/img/Carousel/he5v7szravg8ycizpk7w.webp" class="d-block w-100" alt="carousel-item">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/img/Carousel/abzji3tpra23wvf9fprh.jfif" class="d-block w-100" alt="carousel-item">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/img/Carousel/rhml4pma2kfahfsmpbpy.jfif" class="d-block w-100" alt="carousel-item">
+                </div>
+                
+            </div>
+        </div>
+
+       
+
+
+        
+    </div>
+</body>
+

@@ -1,0 +1,26 @@
+﻿@model Order
+
+    <td class="text-center">@Model.Id</td>
+    <td class="text-center">@Model.Date</td>
+    <td class="dropdown text-center">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @Model.Custumer
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <small class="dropdown-item">@Model.PhoneNumber</small>
+            <small class="dropdown-item">@Model.Adress</small>
+            <small class="dropdown-item">@Model.Comment</small>
+        </div>
+    </td>
+    <td class="dropdown text-center">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Продукты
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach (var product in Model.Lines)
+            {
+                <small class="dropdown-item">@(product.Name+" " + "x" + product.Quantity+" "+ $"price ={product.Price}")</small>
+            }
+        </div>
+    </td>
+    <td class="text-center">@(Model.Amount.ToString("C2",CultureInfo.CurrentCulture))</td>

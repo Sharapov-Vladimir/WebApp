@@ -1,0 +1,56 @@
+﻿@model OrderViewModel
+@{
+    ViewData["Title"] = "Заказы в пути";
+}
+<body>
+    
+        <table class="table taЬle-striped table-bordered table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Дата</th>
+                    <th class="text-center">Заказчик</th>
+                    <th class="text-center">Заказ</th>
+                    <th class="text-center">Сумма заказа</th>
+                    <th class="text-center">Курьер</th>
+                    <th class="text-center">Действия</th>
+                </tr>
+            </thead>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+
+                    @await Html.PartialAsync("TablePartial", order)
+                    <td class="dropdown text-center">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @(order.courier.FirstName+order.courier.LastName)
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <small class="dropdown-item">@order.courier.PhoneNumber</small>
+                        </div>
+                    </td>
+
+                    <td class="text-center">
+
+
+                        <form method="post" asp-action="ToArchive" class="form" style="margin:5px">
+
+                            <input type="hidden" name="returnToAction" value="Dispatched" />
+                            <input type="hidden" name="OrderId" value="@order.Id" />
+                            <button type="submit" class="btn btn-sm btn-info">
+                                В архив
+                            </button>
+
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div page-model="@Model.PagingInfo" page-action="Dispatched" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-secondary"
+             page-class-selected="btn-primary"
+             class="btn-group pull-right m-1">
+        </div>
+    
+</body>

@@ -1,0 +1,61 @@
+﻿@model List<Courier>
+@{
+    ViewData["Title"] = "Список курьеров";
+}
+<body>
+    <div class="row">
+        <div class="col-10">
+            <table class="table taЬle-striped table-bordered table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Имя</th>
+                        <th class="text-center">Фамилия</th>
+                        <th class="text-center">Номер телефона</th>
+                        <th class="text-center">Действия</th>
+                    </tr>
+                </thead>
+                @foreach (var courier in Model)
+                {
+                    <tr>
+
+                        <td class="text-center">
+                            @courier.Id
+                        </td>
+                        <td class="text-center">
+                            @courier.FirstName
+                        </td>
+                        <td class="text-center">
+                            @courier.LastName
+                        </td>
+                        <td class="text-center">
+                            @courier.PhoneNumber
+                        </td>
+                        <td class="text-center">
+                            <form method="post" asp-action="Delete" class="form" style="margin:5px">
+
+                                <input type="hidden" name="courierId" value="@courier.Id" />
+                                <a asp-action="Orders" asp-route-courierid="@courier.Id" class="btn btn-warning btn-sm">
+                                    Заказы
+                                </a>
+                                <a asp-action="Edit" asp-route-courierid="@courier.Id" class="btn btn-warning btn-sm">
+                                    Редактировать
+                                </a>
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Удалить
+                                </button>
+
+                            </form>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-primary" asp-action="Create">
+                Добавить курьера
+            </a>
+        </div>
+    </div>
+</body>

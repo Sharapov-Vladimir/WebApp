@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar fixed-top  box-shadow">
+
+            <a class="navbar-brand " asp-area="Admin" asp-controller="Home" asp-action="Index">WebApp</a>
+           
+            <form method="post" asp-area="" asp-controller="Account" asp-action="Logout">
+                <input class="btn btn-outline-light" type="submit" value="Выход" />
+            </form>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="side-nav">
+
+
+            <div class="category-section p-2">
+
+                <a asp-controller="Order" asp-action="Archive">
+
+                    <img src="~/icons/AdminMenu/archive.png" class="rounded" width="40" height="40" alt="архив">
+                    <span>Архив</span>
+
+                </a>
+            </div>
+            <div class="category-section p-2">
+
+                <a asp-controller="Order" asp-action="Hot">
+
+                    <img src="~/icons/AdminMenu/hot.png" class="rounded" width="40" height="40" alt="горящие заказы">
+                    <span>Горячее</span>
+
+                </a>
+            </div>
+            <div class="category-section p-2">
+
+                <a asp-controller="Order" asp-action="Dispatched">
+
+                    <img src="~/icons/AdminMenu/dispatched.png" class="rounded" width="40" height="40" alt="заказы">
+                    <span class="text-center">Заказы в пути</span>
+
+                </a>
+            </div>
+            <div class="category-section p-2">
+
+                <a asp-controller="Product" asp-action="List">
+
+                    <img src="~/icons/AdminMenu/products.png" class="rounded" width="40" height="40" alt="продукты">
+                    <span>Продукты</span>
+
+                </a>
+            </div>
+            <div class="category-section p-2">
+
+                <a asp-controller="Employee" asp-action="List">
+
+                    <img src="~/icons/AdminMenu/employee.png" class="rounded" width="40" height="40" alt="сотрудники">
+                    <span>Сотрудники</span>
+
+                </a>
+            </div>
+
+        </div>
+        <div class="main">
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-success mt-1">@TempData["message"]</div>
+            }
+            @RenderBody()
+        </div>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar fixed-top box-shadow">
+
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApp</a>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                
+
+                <form method="post" asp-area="" asp-controller="Account" asp-action="Logout">
+                    <input class="btn btn-outline-light" type="submit" value="Выход" />
+                </form>
+            }
+            else
+            {
+                <a class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="Login">Сотрудникам</a>  
+            }
+            
+        </nav>
+    </header>
+    <div class="container">
+        
+            @RenderBody()
+        
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+   
+    @RenderSection("Scripts", required: false)
+    <script>$.validator.setDefaults({ ignore: [] });
+    </script>
+</body>
+</html>

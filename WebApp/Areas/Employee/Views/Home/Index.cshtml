@@ -1,0 +1,73 @@
+﻿@model Courier
+
+@{
+    ViewData["Title"] = "Профиль";
+}
+<body>
+    <div class="row">
+        <div class="col-12">
+            <h1>@Model.FirstName  @Model.LastName</h1>
+
+
+            <a class="button btn btn-primary" asp-area="Employee" asp-controller="Home" asp-action="Hot">Взять новый заказ</a>
+
+
+            <div class="mt-5">
+
+                <h2 class="mb-3">
+                    Ваши заказы
+                </h2>
+
+                <table class="table taЬle-striped table-bordered table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Дата</th>
+                            <th class="text-center">Заказчик</th>
+                            <th class="text-center">Заказ</th>
+                            <th class="text-center">Сумма заказа</th>
+                            <th class="text-center">Действия</th>
+                        </tr>
+                    </thead>
+                    @foreach (var order in Model.personalOrders.Where(o => o.IsActive == true))
+                    {
+                        <tr>
+
+                            @await Html.PartialAsync("TablePartial", order)
+
+                            
+                            <td class="text-center">
+                                @{if (order.IsDelivered == false)
+                                    {<form method="post" asp-action="ConfirmDelivery" class="form" style="margin:5px">
+                                            <input type="hidden" name="OrderId" value="@order.Id" />
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                Доставлен
+                                            </button>
+
+
+                                        </form>
+                                        <form method="post" asp-action="Delete" class="form" style="margin:5px">
+                                            <input type="hidden" name="OrderId" value="@order.Id" />
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                Отказаться
+                                            </button>
+
+
+                                        </form>
+
+
+                                    } }
+
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+        
+
+</body>

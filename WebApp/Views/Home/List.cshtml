@@ -1,0 +1,136 @@
+﻿@model ProductListViewModel
+@{
+    ViewData["Title"] = "Список товаров";
+}
+<body>
+    <div class="side-nav">
+
+
+        @foreach (var item in Model.Categories)
+        {
+            <div class="category-section p-2">
+                <a asp-action="List" asp-route-category="@item.Name">
+                    <img src="@item.ImgPath" alt="@item.Name" class="rounded" width="40" height="40" />
+                    <span>@item.Name</span>
+                </a>
+            </div>
+        }
+
+    </div>
+    <div class="main-prod">
+
+        <div class="row">
+            <div class="col-12 col-lg-8 d-lg-block" id="products">
+                <div class="row">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="col-12 col-lg-6 px-2">
+                            <div class="card mb-3 shadow product-card">
+                                <img src="@product.ImgPath" class="card-img-top" alt="@product.Name">
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">@product.Name</h4>
+                                    <p class="card-text description">@product.Description</p>
+                                    <div class="row align-items-center">
+                                        <div class="col-6 text-left">
+                                            @product.Price.ToString("C2")
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <button type="button" class="btn btn-primary product" data-product='@Json.Serialize(product)'>
+                                                Добавить
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="text-center mt-5">
+                    <div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+                         page-class="btn" page-class-normal="btn-secondary"
+                         page-class-selected="btn-primary"
+                         class="btn-group pull-right m-1" page-url-category="@Model.CurrentCategory">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 d-none d-lg-block" id="col-cart">
+
+                <div class="card cart-card">
+                    <div class="cart cart-title text-center mt-3">
+                        <h2>Ваш заказ</h2>
+                    </div>
+
+                    <div class="cart cart-empty text-center">
+                        <img src="~/icons/cart-bg-icon.png" class="mt-5 mr-4" width="175" height="175" alt="cart-empty" />
+                    </div>
+                    <h3 class="cart cart-empty text-black-50 text-center mt-3 pb-5">Пусто</h3>
+
+                    <div class="cart card-body" id="cart">
+
+
+                        <ul id="cart-list" class="list-group list-group-flush overflow-auto">
+                        </ul>
+                        <div class="text-right mt-3 mb-4">
+                            <h4 id="total"></h4>
+                        </div>
+
+
+                        <div class="cart-control text-center">
+
+                            <button class="btn btn-primary confirm">Оформить заказ</button>
+
+                        </div>
+
+                    </div>
+
+                    <form asp-controller="Home" asp-action="Order" method="post" class="form  p-3" id="cart-form">
+                        
+                        <div class="form-group">
+                            <label asp-for="Form.PhoneNumber">Номер телеофна</label>
+                            <input asp-for="Form.PhoneNumber" type="tel" class="form-control">
+                            <span asp-validation-for="Form.PhoneNumber" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Form.Custumer">Фамилия и имя получателя</label>
+                            <input asp-for="Form.Custumer" type="text" class="form-control">
+                            <span asp-validation-for="Form.Custumer" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Form.Adress">Адрес доставки</label>
+                            <input asp-for="Form.Adress" type="text" class="form-control">
+                            <span asp-validation-for="Form.Adress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Form.Comment">Комментарий к заказу</label>
+                            <textarea asp-for="Form.Comment" class="form-control"></textarea>
+                        </div>
+                        <input type="hidden" asp-for="Form.JsonLines" id="cart-products" />
+                        <input type="hidden" asp-for="Form.Amount" id="cart-amount" />
+                        <input type="hidden" asp-for="Form.Date" id="cart-date" />
+                        <button type="submit" class="btn btn-primary submit text-center">Заказать!</button>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="col fixed-bottom  d-lg-none" id="toggler_mb1">
+                <button type="submit" class="btn btn-primary mb1 w-100">Корзина</button>
+            </div>
+            <div class="col fixed-bottom d-none d-lg-none" id="toggler_mb2">
+                <button type="submit" class="btn btn-primary mb2 w-100">Товары</button>
+            </div>
+        </div>
+    </div>
+</body>
+@section scripts
+{
+
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+
+    <script src="~/js/cart.js">
+
+    </script>
+  
+}

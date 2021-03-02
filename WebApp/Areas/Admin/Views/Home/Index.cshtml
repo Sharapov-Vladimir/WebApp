@@ -1,0 +1,25 @@
+﻿@model WebApp.Areas.Admin.Models.ViewModels.IndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<body>
+    <div class="row">
+        <div class="col-12">
+            <div id="column_chart" data-graph='@Json.Serialize(Model.ColumnChart)'></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="pie_chart" data-graph='@Json.Serialize(Model.PieChartCategory)'></div>
+        </div>
+    </div>
+  
+</body>
+
+@section scripts
+{ 
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/js/chart.js"></script>
+
+}

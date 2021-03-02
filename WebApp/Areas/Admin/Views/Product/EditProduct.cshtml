@@ -1,0 +1,46 @@
+﻿@model CreateProductViewModel
+@{
+    ViewData["Title"] = "Изменить продукт";
+
+}
+<body>
+    <div class="text-danger" asp-validation-summary="All"></div>
+       
+    <form asp-action="EditProduct" method="post" class="form" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+           
+            <div class="form-group">
+                <label asp-for="SelectedCategory">Категория</label>
+                <select class="form-control" asp-for="SelectedCategory">
+                    <option selected>@Model.SelectedCategory</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option>@category.Name</option>
+                    }
+
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Название продукта</label>
+                <input class="form-control" type="text" asp-for="Name" value="@Model.Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Описание товара</label>
+                <textarea class="form-control" asp-for="Description">@Model.Description</textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Цена</label>
+                <input class="form-control" type="text" asp-for="Price" value="@Model.Price" />
+            </div>
+            <div class="form-group">
+                <label>Изображение</label>
+                <input class="form-control-file" type="file" name="file" />
+            </div>
+            <input type="submit" class="btn btn-primary" value="Добавить" />
+
+
+        </form>
+    
+</body>
