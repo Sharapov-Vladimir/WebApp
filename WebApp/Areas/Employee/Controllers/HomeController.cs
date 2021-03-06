@@ -94,7 +94,7 @@ namespace WebApp.Areas.Employee.Controllers
             repo.SaveOrder(order);
 
             TempData["message"] = "Заказ был удален";
-            return RedirectToAction("MyOrders");
+            return RedirectToAction("Index");
         }
         
        
