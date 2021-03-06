@@ -76,7 +76,7 @@ namespace WebApp.Areas.Employee.Controllers
             repo.SaveOrder(order);
 
             ViewData["message"] = "Статус изменен";
-            return RedirectToAction("MyOrders");
+            return RedirectToAction("Index");
         }
 
 
