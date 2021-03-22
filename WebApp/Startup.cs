@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using.System.Globalization;
 using WebApp.Data;
 using WebApp.Services;
 
@@ -74,6 +75,9 @@ namespace WebApp
 
             app.UseAuthentication();        
             app.UseAuthorization();
+            
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("uk-Ua");
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("uk-Ua");
 
             if (context.Database.EnsureCreated())
             {
