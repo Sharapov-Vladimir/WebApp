@@ -44,12 +44,7 @@ namespace WebApp.Controllers
                     var user = await _userManager.FindByNameAsync(model.Name);
                     var roles = await _userManager.GetRolesAsync(user);
                    
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
+                   
                         if (roles.Contains("admin"))
                         {
                             return RedirectToAction("Index","Home", new {area="Admin"});
@@ -60,7 +55,7 @@ namespace WebApp.Controllers
                         }
 
                         return RedirectToAction("Index", "Home");
-                    }
+                    
                 }
                 else
                 {
