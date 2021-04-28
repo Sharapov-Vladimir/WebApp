@@ -1,7 +1,6 @@
 # WebApp
 
 WebApp is a pet-project that was made as a web store with possibility to make an order , manage the store and handle orders.
-Tap the link https://webapp20210329000024.azurewebsites.net/ to check out this app.
 
 # Functionality
 
